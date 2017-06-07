@@ -110,7 +110,26 @@ def newForm(menu):
     dia = dialog.Ui_Dialog()
     qtdia = QtWidgets.QDialog()
     dia.setupUi(qtdia)
-    qtdia.exec_()
+    revalue = qtdia.exec_()
+    if revalue:
+        print(dia.id.text()+' '+dia.major.text()+' '+dia.comboBox.currentText()+' '+dia.dateEdit.text())
+        id = int(dia.id.text())
+        # birthday = dia.dateEdit.text().replace("/","-")
+        date = dia.dateEdit.text().split('/')
+        if int(date[1]) < 10 :
+            date[1] = '0'+date[1]
+        if int(date[2]) < 10 :
+            date[2] = '0'+date[2]
+        birthday = date[0]+'-'+date[1]+'-'+date[2]
+        print(birthday)
+        disMenuEvents(dui)
+        disEvents(dui)
+        DBcon.Insert(id,dia.name.text(),dia.comboBox.currentText(),birthday,dia.major.text())
+        SelectUI(dui)
+        addMenuEvents(dui)
+        addEvents(dui)
+    else:
+        pass
 def deleteRow():
     items = dui.centralwidget.selectedIndexes()
     # for it in items

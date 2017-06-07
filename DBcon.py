@@ -13,9 +13,10 @@ connect = pymysql.Connect(
 cursor = connect.cursor()
 
 # 插入
-def Insert(string):
-    sql = "INSERT INTO students (id,name,sex,birthday,major) VALUE (%s)"
-    data = (string)
+def Insert(id,name,sex,birthday,major):
+    print("开始插入 "+birthday)
+    sql = "INSERT INTO students (id,name,sex,birthday,major) VALUE (%d,'%s','%s','%s','%s')"
+    data = (id,name,sex,birthday,major)
     cursor.execute(sql % data)
     connect.commit()
 
