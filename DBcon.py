@@ -33,9 +33,9 @@ def Delete(id):
     connect.close()
 
 # 修改
-def Update(udstring,id):
+def Update(upstring,id):
     sql = "UPDATE students SET %s WHERE id=%d"
-    data = (udstring,id)
+    data = (upstring,id)
     cursor.execute(sql % data)
     connect.commit()
 
@@ -50,11 +50,7 @@ def Select():
 
     cursor.close()
     connect.close()
-    # no = 0
-    # for row in cursor.fetchall():
-    #     no = no + 1
-    #     print("%d."% no,end = "")
-    #     print("id:%d num:%d" % row)
+
 
 
 

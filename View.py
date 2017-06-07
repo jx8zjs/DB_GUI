@@ -1,7 +1,7 @@
 from PyQt5 import QtWidgets
 import DBcon
 
-gresult = None
+
 #展示
 def showTable(ui):
     ui.centralwidget.setColumnCount(5)
@@ -18,8 +18,7 @@ def addEvents(ui):
     qw.itemClicked.connect(outSelect)
 
 def outChange(item):
-    # print(item.text())
-    pass
+    print(item.text())
 
 def outSelect():
     items = dui.centralwidget.selectedIndexes()
@@ -28,7 +27,9 @@ def outSelect():
 #查询
 def SelectUI(ui):
     no = 0
-    results = DBcon.Select();
+    results = DBcon.Select()
+    global gresult
+    gresult = results
     ui.centralwidget.setRowCount(results.__len__())
     for row in results:
         for num in range(0,5):
@@ -37,13 +38,19 @@ def SelectUI(ui):
             ui.centralwidget.setItem(no,num,item)
             ui.centralwidget.setAutoScroll(1)
         no = no + 1
-    return results.__len__()
+    # return results.__len__()
+
 #添加
 def InsertUI():
-    pass
+    InStr = ""
+    DBcon.Insert(InStr)
+
 #删除
-def DeleteUI():
-    pass
+def DeleteUI(index):
+    DBcon.Delete(gresult.__getitem__(index)[0])
+
 #修改
-def UpdateUI():
-    pass
+def UpdateUI(index):
+    UpStr = ""
+    id = gresult.__getitem__(index)[0]
+    DBcon.Update(UpStr,id)
