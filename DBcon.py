@@ -3,9 +3,9 @@
 import  pymysql.cursors
 connect = pymysql.Connect(
     host='localhost',
-    port=3306,
+    port=3308,
     user='root',
-    passwd='0213',
+    passwd='mysql',
     db='mydb',
     charset='utf8'
 )
