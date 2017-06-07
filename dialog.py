@@ -6,8 +6,8 @@
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt5 import QtCore, QtGui, QtWidgets
-
+from PyQt5 import QtCore, QtWidgets
+import View
 class Ui_Dialog(object):
     def setupUi(self, Dialog):
         Dialog.setObjectName("Dialog")
@@ -22,6 +22,7 @@ class Ui_Dialog(object):
         self.label.setObjectName("label")
         self.id = QtWidgets.QLineEdit(Dialog)
         self.id.setGeometry(QtCore.QRect(90, 50, 113, 20))
+        self.id.setText(str(View.getNumber()))
         self.id.setObjectName("id")
         self.label_2 = QtWidgets.QLabel(Dialog)
         self.label_2.setGeometry(QtCore.QRect(230, 60, 54, 12))

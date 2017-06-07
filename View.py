@@ -1,9 +1,13 @@
 from PyQt5 import QtWidgets
 import DBcon
-import dialog,datetime
+import dialog
+
+#全局变量
 dui = None
 gresult = None
 gclomn = None
+number = None
+
 def showTable(ui):
     ui.centralwidget.setColumnCount(5)
     ui.centralwidget.setHorizontalHeaderLabels(["学号", "姓名", "性别", "生日", "专业"])
@@ -68,6 +72,15 @@ def SelectUI(ui):
             ui.centralwidget.setAutoScroll(1)
         no = no + 1
     # return results.__len__()
+    global number
+    number = 2016102501
+    for num in range(0,gresult.__len__()):
+        if number == gresult[num][0]:
+            number = number+1
+        else:
+            break
+    # print(number)
+
     print("select调用完成")
 #添加
 def InsertUI():
@@ -111,6 +124,7 @@ def newForm(menu):
     qtdia = QtWidgets.QDialog()
     dia.setupUi(qtdia)
     revalue = qtdia.exec_()
+
     if revalue:
         print(dia.id.text()+' '+dia.major.text()+' '+dia.comboBox.currentText()+' '+dia.dateEdit.text())
         id = int(dia.id.text())
@@ -148,3 +162,5 @@ def deleteRow():
 
     else:
         pass
+def getNumber():
+    return number
