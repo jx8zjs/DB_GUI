@@ -34,9 +34,13 @@ def disMenuEvents(ui):
 
 def outChange(item):
     print(item.text())
+    disEvents(dui)
+    disMenuEvents(dui)
     global gclomn
     UpdateUI(dui.centralwidget.selectedIndexes()[0].row(),gclomn,item)
     SelectUI(dui)
+    addEvents(dui)
+    addMenuEvents(dui)
 def outSelect():
     items = dui.centralwidget.selectedIndexes()
     global gclomn
@@ -55,7 +59,7 @@ def SelectUI(ui):
     global gresult
     gresult = results
     ui.centralwidget.setRowCount(results.__len__())
-    print("select声称界面")
+    print("select生成界面")
     for row in results:
         for num in range(0,5):
             item = QtWidgets.QTableWidgetItem()
@@ -115,12 +119,12 @@ def deleteRow():
     reply = QtWidgets.QMessageBox.question(None, '消息', '确认删除？',QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
     if(reply==QtWidgets.QMessageBox.Yes):
         print(items[0].row())
-        # disEvents(dui)
-        # disMenuEvents(dui)
+        disEvents(dui)
+        disMenuEvents(dui)
         DeleteUI(items[0].row())
         SelectUI(dui)
-        # addMenuEvents(dui)
-        # addEvents(dui)
+        addMenuEvents(dui)
+        addEvents(dui)
         print("测试")
 
     else:
