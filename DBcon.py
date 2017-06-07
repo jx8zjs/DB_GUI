@@ -31,7 +31,7 @@ def Delete(id):
 
     cursor.close()
     connect.close()
-
+    print("已关闭")
 # 修改
 def Update(upstring,id):
     sql = "UPDATE students SET %s WHERE id=%d"

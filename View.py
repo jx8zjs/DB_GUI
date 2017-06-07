@@ -2,16 +2,16 @@ from PyQt5 import QtWidgets
 import DBcon
 import dialog
 from PyQt5 import QtCore
-
+dui = None
 gresult = None
 def showTable(ui):
     ui.centralwidget.setColumnCount(5)
     ui.centralwidget.setHorizontalHeaderLabels(["学号", "姓名", "性别", "生日", "专业"])
-    global dui
-    dui = ui
+
 
     SelectUI(ui)
     addEvents(ui)
+    addMenuEvents(ui)
 
 def addEvents(ui):
     qw = ui.centralwidget
@@ -21,6 +21,14 @@ def addEvents(ui):
 def addMenuEvents(ui):
     ui.actionAdd.triggered.connect(newForm)
     ui.actionDelete.triggered.connect(deleteRow)
+def deEvents(ui):
+    qw = ui.centralwidget
+    qw.itemChanged.disconnect(outChange)
+    qw.itemClicked.disconnect(outSelect)
+
+def deMenuEvents(ui):
+    ui.actionAdd.triggered.disconnect(newForm)
+    ui.actionDelete.triggered.disconnect(deleteRow)
 
 def outChange(item):
     print(item.text())
@@ -31,11 +39,16 @@ def outSelect():
         print('selected item index found at %s' % it.row())
 #查询
 def SelectUI(ui):
+    global dui
+    dui = ui
+    print("select开始")
     no = 0
     results = DBcon.Select()
+    print("select连接数据库")
     global gresult
     gresult = results
     ui.centralwidget.setRowCount(results.__len__())
+    print("select声称界面")
     for row in results:
         for num in range(0,5):
             item = QtWidgets.QTableWidgetItem()
@@ -44,7 +57,7 @@ def SelectUI(ui):
             ui.centralwidget.setAutoScroll(1)
         no = no + 1
     # return results.__len__()
-
+    print("select调用完成")
 #添加
 def InsertUI():
     InStr = ""
@@ -53,7 +66,7 @@ def InsertUI():
 #删除
 def DeleteUI(index):
     DBcon.Delete(gresult.__getitem__(index)[0])
-
+    SelectUI(dui)
 #修改
 def UpdateUI(index):
     UpStr = ""
@@ -68,10 +81,18 @@ def newForm(menu):
     qtdia.exec_()
 def deleteRow():
     items = dui.centralwidget.selectedIndexes()
-    for it in items:
-        print('selected item index found at %s' % it.row())
+    # for it in items
+    #     # print('selected item index found at %s' % it.row())
+    #
     reply = QtWidgets.QMessageBox.question(None, '消息', '确认删除？',QtWidgets.QMessageBox.Yes | QtWidgets.QMessageBox.No, QtWidgets.QMessageBox.No)
     if(reply==QtWidgets.QMessageBox.Yes):
-        print('delete')
+        print(items[0].row())
+        # deEvents(dui)
+        # deMenuEvents(dui)
+        DeleteUI(items[0].row())
+        print("测试")
+        # addEvents(dui)
+        # addMenuEvents(dui)
+
     else:
         pass
