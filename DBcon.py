@@ -4,45 +4,53 @@ import  pymysql.cursors
 
 connect = pymysql.Connect(
     host='localhost',
-    port=3308,
+    port=3306,
     user='root',
-    passwd='mysql',
+    passwd='0213',
     db='mydb',
     charset='utf8'
 )
 cursor = connect.cursor()
 
 # 插入
-# sql = "INSERT INTO students (id,name,sex,birthday,major,grade) VALUE (%d,%d)"
-# data = (15,211)
-# cursor.execute(sql % data)
-# connect.commit()
+def Insert(string):
+    sql = "INSERT INTO students (id,name,sex,birthday,major) VALUE (%s)"
+    data = (string)
+    cursor.execute(sql % data)
+    connect.commit()
+
+    cursor.close()
+    connect.close()
 
 # 删除
+def Delete(id):
+    sql = "DELETE FROM students WHERE id = %d"
+    data = (id)
+    cursor.execute(sql % data)
+    connect.commit()
 
-# sql = "DELETE FROM students WHERE id = %d"
-# data = (15)
-# cursor.execute(sql % data)
-# connect.commit()
+    cursor.close()
+    connect.close()
 
 # 修改
-# sql = "UPDATE students SET num=%d WHERE id=%d"
-# data = (121,15)
-# cursor.execute(sql % data)
-# connect.commit()
+def Update(upstring,id):
+    sql = "UPDATE students SET %s WHERE id=%d"
+    data = (upstring,id)
+    cursor.execute(sql % data)
+    connect.commit()
+
+    cursor.close()
+    connect.close()
 
 # 查询
 def Select():
     sql = "SELECT * FROM students"
     cursor.execute(sql)
     return cursor.fetchall()
+
     cursor.close()
     connect.close()
-    # no = 0
-    # for row in cursor.fetchall():
-    #     no = no + 1
-    #     print("%d."% no,end = "")
-    #     print("id:%d num:%d" % row)
+
 
 
 

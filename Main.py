@@ -10,6 +10,8 @@ if __name__=="__main__":
     qtUI.show()
     ui.centralwidget.parent().setObjectName("学生管理系统")
     ui.centralwidget.resize(ui.centralwidget.parent().size())
+
+
     View.showTable(ui)
     #View.addEvents(ui)
     exit(app.exec())
