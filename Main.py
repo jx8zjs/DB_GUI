@@ -1,6 +1,6 @@
 import sys
 from PyQt5 import QtWidgets
-import UI
+import UI,DBcon
 import View
 if __name__=="__main__":
     app = QtWidgets.QApplication(sys.argv)
@@ -15,3 +15,4 @@ if __name__=="__main__":
     View.showTable(ui)
     #View.addEvents(ui)
     exit(app.exec())
+    DBcon.close()

@@ -19,8 +19,6 @@ def Insert(string):
     cursor.execute(sql % data)
     connect.commit()
 
-    cursor.close()
-    connect.close()
 
 # 删除
 def Delete(id):
@@ -29,27 +27,35 @@ def Delete(id):
     cursor.execute(sql % data)
     connect.commit()
 
-    cursor.close()
-    connect.close()
     print("已关闭")
 # 修改
-def Update(upstring,id):
-    sql = "UPDATE students SET %s WHERE id=%d"
-    data = (upstring,id)
+def Update(id,name,sex,birthday,major,wid):
+    print("开始修改")
+    print(type(wid))
+    print(type(id))
+    sql = "UPDATE students SET id=%d,name='%s',sex='%s',birthday='%s',major='%s' WHERE id=%d"
+    data = (id,name,sex,birthday,major,wid)
+    print(sql % data)
     cursor.execute(sql % data)
+    print("修改数据中")
     connect.commit()
 
-    cursor.close()
-    connect.close()
 
 # 查询
 def Select():
-    sql = "SELECT * FROM students"
-    cursor.execute(sql)
-    return cursor.fetchall()
 
+        sql = "SELECT * FROM students"
+        cursor.execute(sql)
+        return cursor.fetchall()
+
+
+def close():
     cursor.close()
     connect.close()
+
+
+
+
 
 
 
