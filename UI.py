@@ -41,6 +41,6 @@ class Ui_MainMW(object):
     def retranslateUi(self, MainMW):
         _translate = QtCore.QCoreApplication.translate
         MainMW.setWindowTitle(_translate("MainMW", "学生管理系统"))
-        self.menu.setTitle(_translate("MainMW", "添加数据"))
+        self.menu.setTitle(_translate("MainMW", "编辑数据"))
         self.actionAdd.setText(_translate("MainMW", "添加行"))
-        self.actionDelete.setText(_translate("MainMW", "删除"))
+        self.actionDelete.setText(_translate("MainMW", "删除行"))
